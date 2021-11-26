@@ -240,12 +240,12 @@ public struct Moment {
     public static Moment FromJulianYear(int year) {
         return new DateTime(year: year, month: 1, day: 1, new JulianCalendar());
     }
-
+    
     /// <summary>
     /// Greenwich mean sidereal time at this moment in time
     /// </summary>
     /// <value>gmst</value>
-    public TimeSpan GreenwichMeanSiderealTime() {
+    public Angle GreenwichMeanSiderealTime() {
         // Meeus, Chap 12 (pp 87-89) 
         var JD = this.JulianDay;
         var T = ((JD - 2451545.0) / 36525);
@@ -258,7 +258,7 @@ public struct Moment {
         }
 
         // Convert to time
-        return TimeSpan.FromHours(theta/15);
+        return Angle.Degrees(theta);
     }
 
     /*
